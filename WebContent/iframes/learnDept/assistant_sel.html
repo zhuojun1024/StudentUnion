@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/StudentUnion/js/jquery-1.9.1.min.js"></script>
+<script src="/StudentUnion/js/learnDept/ass_sel_js.js"></script>
+<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+		font-family: '幼圆';
+	}
+	.title{
+		text-align: center;
+		font-size: 24px;
+		margin: 20px 0px;
+	}
+	table{
+		width: 96%;
+		margin: auto;
+		border-collapse:collapse;
+	}
+	td{
+		height: 28px;
+		border: 1px solid #1499F7;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	table tr:not(:first-child):hover{
+		border: 2px solid #10C910;
+	}
+	.search{
+		width: 96%;
+		text-align: left;
+		margin: 0px auto;
+		margin-bottom: 8px;
+	}
+	.search input{
+		width: 120px;
+		height: 28px;
+		background-color: rgba(0,0,0,0);
+		border: none;
+		border-bottom: 1px solid #000;
+		outline: none;
+		text-align: center;
+		font-size: 16px;
+		margin-right: 12px;
+	}
+	p a{
+		margin: auto;
+		border-radius: 3px;
+		cursor: pointer;
+		padding: 8px 16px;
+		background-color: #1499F7;
+		color: #FFF;
+		text-decoration: none;
+	}
+	.botton,.bottom,.delBottom{
+		width: 96%;
+		text-align: right;
+		margin: 20px auto;
+	}
+	.botton a{
+		margin: 0px 8px;
+	}
+	td a:not(.disabled){
+		padding: 4px 20%;
+		text-decoration: none;
+		cursor: pointer;
+		color: #1499F7;
+		font-weight: bold;
+	}
+	td a:not(.disabled):hover{
+		color: #00F;
+	}
+	.ass_info tr td:nth-child(1){
+		width: 9%;
+	}
+	.ass_info tr td:nth-child(2){
+		width: 18%;
+	}
+	.ass_info tr td:nth-child(3){
+		width: 18%;
+	}
+	.ass_info tr td:nth-child(4){
+		width: 18%;
+	}
+	.ass_info tr td:nth-child(5){
+		width: 18%;
+	}
+	.ass_info tr td:nth-child(6){
+		width: 10%;
+	}
+	.ass_info tr td:nth-child(7){
+		width: 9%;
+	}
+	.ass_info tr td:nth-child(7) a{
+		color: #F00;
+		font-weight: normal;
+	}
+	.ass_info tr td:nth-child(7) a:hover{
+		font-weight: bold;
+	}
+	.mask{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		background-color: rgba(0,0,0,0.5);
+		z-index: 1002;
+		display: none;
+	}
+	.finish{
+		width: 100%;
+		height: 50px;
+		background-color: #00C900;
+		line-height: 50px;
+		text-align: center;
+		font-size: 20px;
+		color: #FFF;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	   	z-index: 1003;
+		display: none;
+	}
+	.updateWindow,.delWindow{
+		width: 500px;
+		height: 240px;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		margin: auto;
+		border: 1px solid #1499F7;
+		border-radius: 5px;
+		background-color: #E7F5FF;
+		display: none;
+	}
+	.delWindow .del{
+		background-color: #F00;
+	}
+	.delWindow{
+		width: 400px;
+	}
+	.delWindow p:first-child{
+		text-align: center;
+		font-size: 24px;
+		margin: 86px 0px;
+		color: #F00;
+		font-weight: bold;
+	}
+	.aclass{
+		width: 100%;
+		height: 100%;
+		border: none;
+		background-color: rgba(0,0,0,0);
+		padding: 0px 6px;
+		font-size: 16px;
+	}
+	a:hover{
+		opacity: 0.7;
+	}
+</style>
+</head>
+<body>
+	<p class="title">助教查询</p>
+	<p class="search">
+		<input name="sel_info" placeholder="学号/姓名/班级" />
+		<a href="javascript:;" onclick="sel()">查询</a>
+	</p>
+	<table class="ass_info" border="1">
+		<tr>
+			<td>编号</td>
+			<td>助教学号</td>
+			<td>助教姓名</td>
+			<td>所在班级</td>
+			<td>所教班级</td>
+			<td>变更</td>
+			<td>操作</td>
+		</tr>
+	</table>
+	<p class="botton"></p>
+ 	<div class="mask">
+		<div class="updateWindow">
+			<p class="title">助教信息变更</p>
+			<table>
+				<tr>
+					<td>助教学号</td>
+					<td class="asno"></td>
+				</tr>
+				<tr>
+					<td>助教姓名</td>
+					<td class="bname"></td>
+				</tr>
+				<tr>
+					<td>所教班级</td>
+					<td class="bauthor"></td>
+				</tr>
+				<tr>
+					<td>变更为</td>
+					<td>
+						<select class="aclass">
+							<option value="">请选择班级</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<p class="bottom">
+				<a href="javascript:closeWindow()">取消</a>
+				<a href="javascript:;">完成</a>
+			</p>
+		</div>
+		<div class="delWindow">
+			<p>确定要删除该条数据吗？</p>
+			<p class="delBottom">
+				<a href="javascript:closeWindow()">取消</a>
+				<a href="javascript:delNotice()" class="del">确定</a>
+			</p>
+		</div>
+	</div>
+	<div class="finish">
+		编辑成功
+	</div>
+	
+	<div id="upd_inf" style="position:absolute; top:0; left:0; width:100%; width:100%; text-align:center; background-color: blue; display:none">
+		<div>
+			<form>
+				<input name="aid" style="display:none" />
+				助教学号：<input name="asno" /><br />
+				<input style="display:none" />
+				助教姓名：<span></span>
+				<input style="display:none" value="asclass" /><br />
+				所教班级：
+				<select name="aclass">
+					<option value="">请选择班级</option>
+				</select><br />
+				<input type="submit" value="修改" />
+				<input type="reset" />
+				<input type="button" value="完成" onclick="none()" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>

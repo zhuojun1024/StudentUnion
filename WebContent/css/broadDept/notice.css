@@ -1,0 +1,63 @@
+/*这是寻物启事的样式*/
+
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: '幼圆';
+}
+a{
+	text-decoration: none;
+}
+/* 顶部发布消息和搜索框 */
+.updata{
+	width: 80%;
+	margin: 0 auto;
+	margin-top:25px;
+/* 	background-color: red; */
+}
+.updata .seek{
+	float: right;
+	margin-right: 35px;
+}
+
+fieldset{
+	width: 80%;
+	border: 1px solid #1499F7;
+	border-radius: 5px;
+	margin: 30px auto;
+	padding: 10px;
+}
+legend{
+	margin-left: 50px;
+	padding: 0px 5px;
+}
+fieldset p{
+	line-height: 24px;
+	text-indent: 2em;
+}
+/* 添加框 */
+#upDiv{
+	width:50%;
+	height:260px;
+	background-color:#D5EAF3;
+	position: absolute;
+	top:10%;
+	left:25%;
+	text-align:center;
+	display: none;
+	z-index: 5;
+}
+/* 提示框 */
+#hintDiv{
+	width:50%;
+	height:260px;
+	background-color:#D5EAF3;
+	min-width:240px;
+	line-height:240px;
+	position: absolute;
+	top:10%;
+	left:25%;
+	text-align:center;
+	z-index: 5;
+	display: none;
+}

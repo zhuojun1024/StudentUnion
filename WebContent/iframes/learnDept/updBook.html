@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/StudentUnion/css/learnDept/updBook_css.css" />
+<script src="/StudentUnion/js/jquery-1.9.1.min.js"></script>
+<script src="/StudentUnion/js/learnDept/updBook_js.js"></script>
+</head>
+<body>
+<p class="title">添加书籍</p>
+<form action="/StudentUnion/MyServlet?opt=addBook" method="post">
+	<table>
+		<tr>
+			<td>书籍编号</td>
+			<td><input name='bno' /></td>
+		</tr>
+		<tr>
+			<td>书籍名称</td>
+			<td><input name='bname' /></td>
+		</tr>
+		<tr>
+			<td>书籍作者</td>
+			<td><input name='bauthor'/></td>
+		</tr>
+	</table>
+	<p class="botton"><a href="javascript:;" onclick="save()">添加</a></p>
+	<div class="finish">
+		提示消息
+	</div>
+</form>
+</body>
+</html>
+

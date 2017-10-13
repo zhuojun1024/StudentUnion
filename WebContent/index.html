@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+			font-family: '幼圆';
+		}
+		body{
+			margin: 0;
+			padding: 0;
+			background-color: #1499F7;
+		}
+		#login{
+			width: 420px;
+			height: 300px;
+			margin: 0 auto;
+			margin-top: 10%;
+			background-color: #d5ebf3;
+			border-radius: 5px;
+			text-align: center;
+		}
+		#login_top{
+			height: 50px;
+			font-size: 32px;
+			color: #1499F7;
+			padding: 20px;
+		}
+		#login_input input{
+			width: 75%;
+			height: 40px;
+			margin-top: 10px;
+			margin-bottom: 5px;
+			border-radius:3px;
+			border:1px;
+			padding-left:5px;
+		}
+
+		.button_style{
+			background-color: #1499F7;color:#ffffff;font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="login">
+		<div id="login_top">学生会管理系统</div>
+		<div id="login_input">
+			<form action="LoginServlet" method="post" class="login">
+				<input onfocus="clearTips()" type="text" name="sno" placeholder="请输入您的学号"><br/>
+				<input onfocus="clearTips()" type="password" name="spwd" placeholder="请输入您的密码"><br/>
+				<span id="mySpan" style="color:red;"></span><br/>
+				<input type="button" value="登录" class="button_style"><br/>
+			</form>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+		 $("input[type='button']").click(function(){
+			 	if(!$("input[name='sno']").val() || !$("input[name='spwd']").val()){
+					$("#mySpan").text("学号和密码不能为空");
+			 	}else{
+					var param=$(".login").serialize();
+					$.post("LoginServlet",param,function(data){
+						if(data){
+							$(".login").submit();
+						}else{
+							$("#mySpan").text("学号或密码错误");
+						}
+					});
+				}
+			});
+		function clearTips(){
+			$("#mySpan").text("");
+		}
+	</script>
+</html>

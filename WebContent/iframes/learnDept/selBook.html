@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/StudentUnion/css/learnDept/selBook_css.css" />
+<script src="/StudentUnion/js/jquery-1.9.1.min.js"></script>
+<script src="/StudentUnion/js/learnDept/selBook_js.js"></script>
+</head>
+<body>
+	<p class="title">借还登记</p>
+	<p class="search">
+		<input name="name" placeholder="书名 / 编号" />
+		<a href="javascript:selBook()">查询</a>
+	</p>
+	<table class="maintable">
+		<tr>
+			<td>序号</td>
+			<td>图书编号</td>
+			<td>书名</td>
+			<td>作者</td>
+			<td>状态</td>
+			<td>借还</td>
+			<td>查看记录</td>
+		</tr>
+	</table>
+	<p class="botton"></p>
+ 	<div class="mask">
+ 		<div class="recordWindow">
+			<p class="title">借书记录</p>
+ 			<div class="record"></div>
+			<p class="bottom">
+				
+			</p>
+ 		</div>
+		<div class="borrowWindow">
+			<p class="title">借书登记</p>
+			<table>
+				<tr>
+					<td>书籍编号</td>
+					<td class="bno"></td>
+				</tr>
+				<tr>
+					<td>书籍名称</td>
+					<td class="bname"></td>
+				</tr>
+				<tr>
+					<td>书籍作者</td>
+					<td class="bauthor"></td>
+				</tr>
+				<tr>
+					<td>借书人学号</td>
+					<td><input type="text" class="sname" /></td>
+				</tr>
+			</table>
+			<p class="bottom">
+				<a href="javascript:closeWindow()">取消</a>
+				<a href="javascript:;">完成</a>
+			</p>
+		</div>
+		<div class="returnWindow">
+			<p>书本已经归还了吗？</p>
+			<p class="delBottom">
+				<a href="javascript:closeWindow()">没有</a>
+				<a href="javascript:delNotice()">是的</a>
+			</p>
+		</div>
+	</div>
+	<div class="finish">
+		编辑成功
+	</div>
+</body>
+</html>

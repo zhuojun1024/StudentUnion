@@ -1,0 +1,70 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: '幼圆';
+}
+.notice{
+	text-align: center;
+	font-size: 24px;
+	margin: 20px 0px;
+}
+fieldset{
+	width: 80%;
+	border: 1px solid #1499F7;
+	background-color: rgba(255,255,255,0.4);
+	border-radius: 5px;
+	margin: 30px auto;
+	padding: 12px;
+}
+.public{
+	border: 1px solid #10C910;
+}
+.public legend, .public p:last-child{
+	color: #10C910;
+}
+legend{
+	margin-left: 30px;
+	padding: 0px 5px;
+	font-size: 18px;
+	color: #1499F7;
+	font-weight: bold;
+}
+fieldset .content{
+	line-height: 24px;
+	text-indent: 2em;
+	word-break: break-all; 
+}
+fieldset p:last-child{
+	margin-top: 12px;
+	text-align: right;
+	color: #1499F7;
+	font-weight: bold;
+}
+.load{
+	text-align: right;
+	margin: 20px 0px;
+	padding: 0px 9%;
+}
+.load a{
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 8px 16px;
+	background-color: #1499F7;
+	color: #FFF;
+}
+.load a:link, .load a:visited{
+	text-decoration: none;
+	color: #FFF;
+}
+a:hover{
+	opacity: 0.7;
+}
+label{
+	margin-right: 20px;
+	font-weight: bold;
+	color: #10C910;
+	float: left;
+}
+label:first-child{
+	color: #1499F7;
+}

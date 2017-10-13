@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/StudentUnion/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/StudentUnion/css/admin/student.css" />
+</head>
+<body>
+	<p class="title">学员管理</p>
+	<form id="addForm">
+			<input name="name" placeholder="学号 / 姓名" />
+			<select name="class">
+				<option value="">所有班级</option>
+			</select>
+			<select name="department">
+				<option value="">所有部门</option>
+			</select>
+			<a href="javascript:;" onclick="selStu()">查找</a>
+			<a href="javascript:;" onclick="addshow()" id="addStu">添加学生</a>
+	</form>
+	
+	<table id="tab">
+		<tr>
+			<td>序号</td>
+			<td>学号</td>
+			<td>姓名</td>
+			<td>密码</td>
+			<td>所属班级</td>
+			<td>所属部门</td>
+			<td>操作</td>
+		</tr>
+	</table>
+	<p class="botton"></p>
+	
+ 	<div class="mask">
+ 		<div class="addWindow">
+			<p class="title">添加学生</p>
+			<form>
+				<table>
+					<tr>
+						<td>学生编号</td>
+						<td><input name="sno" /></td>
+					</tr>
+					<tr>
+						<td>学生姓名</td>
+						<td><input name="sname" /></td>
+					</tr>
+					<tr>
+						<td>登录密码</td>
+						<td><input name="spwd" /></td>
+					</tr>
+					<tr>
+						<td>所属班级</td>
+						<td>
+							<select name="scname">
+								<option value="">请选择</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>所属部门</td>
+						<td>
+							<select name="sdname">
+								<option value="">请选择</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<p class="bottom">
+					<a href="javascript:closeWindow()">取消</a>
+					<a href="javascript:;">完成</a>
+				</p>
+			</form>
+ 		</div>
+	</div>
+	<div class="finish">
+		提示信息
+	</div>
+</body>
+<script>
+	var page = 1;
+	var pnum = 1;
+	$(document).ready(function(){
+		selStu();
+		$("input").prop("spellcheck",false);
+		$(".mask table tr:even").css("background-color","#D5EAF3");
+	})
+	
+$(window).resize(function(){
+	maskResize();
+});
+function maskResize(){
+ $(".mask").css("height",$(document).height());
+ $(".mask").css("width",$(window).width());
+}
+function addshow(){
+	$(".addWindow .title").text("添加学生");
+	$(".addWindow form")[0].reset();
+	$("input[name='sno']")[0].disabled = "";
+	$(".addWindow a:last").prop("href","javascript:yes(1)");
+	maskResize();
+	$(".addWindow").fadeIn(300);
+	$(".mask").show(300);
+	$("input[name='sno']").focus();
+}
+function updshow(node){
+	$(".addWindow .title").text("修改学生");
+	$("input[name='sno']")[0].disabled = "true";
+	for(var i = 0; i < 5; i++){
+		$(".addWindow input,.addWindow select").eq(i).val(node.cells[i+1].innerText);
+	}
+	$(".addWindow a:last").prop("href","javascript:yes(2)");
+	maskResize();
+	$(".addWindow").fadeIn(300);
+	$(".mask").show(300);
+	$("input[name='sname']").focus();
+}
+function closeWindow(){
+	lpage = 1;
+	lpnum = 1;
+	$(".sname").val("");
+	$(".updWindow,.addWindow").fadeOut(300);
+	$(".mask").hide(300);
+}
+
+	//查询学生信息
+		function selStu(){
+			var strs = "";
+			var param = $("#addForm").serialize();
+			$.post("/StudentUnion/MyServlet?opt=admStu&data="+Math.random(),param+"&page="+page,function(data){
+				$("#tab tr:not(:first)").remove();
+				pnum = data[0].spage;
+				$.each(data,function(i,v){
+					strs += "<tr>";
+					strs += "<td>"+((page-1)*12+i+1)+"</td>";
+					strs += "<td>"+v.sno+"</td>";
+					strs += "<td>"+v.sname+"</td>";
+					strs += "<td>"+v.spassword+"</td>";
+					strs += "<td>"+v.scname+"</td>";
+					strs += "<td>"+v.sdname+"</td>";
+					strs += "<td><a href='javascript:;' onclick='updshow(this.parentNode.parentNode)'>修改</a></td>";
+					strs += "</tr>";
+				});
+				if(data == 0){
+					str +="<tr><td colspan='7'>暂无记录</td></tr>";
+				}else{
+					$(".botton").empty().append("<a href='javascript:;' onclick='aUp()'>上一页</a>第" +
+							page + "/" + pnum +
+							"页<a href='javascript:;' onclick='aDown()'>下一页</a>");
+				}
+				$("#tab").append(strs);
+				$("#tab tr:even").css("background-color","#D5EAF3");
+			},"json");
+			return false;
+		}
+	
+	function aUp(){
+		if(page > 1){
+			page--;
+		}
+		selStu();
+	}
+	
+	function aDown(){
+		if(page < pnum){
+			page++;
+		}
+		selStu();
+	}
+
+	//添加班级信息
+	$(document).ready(function(){
+		$.post("/StudentUnion/MyServlet?opt=admStuCla&data="+Math.random(),null,function(data){
+			var str = "";
+			$.each(data,function(i,v){
+				str = "<option value='"+v+"'>"+v+"</option>";
+				$("select[name=scname], select[name=class]").append(str);
+			});
+		},"json");
+	});
+	
+	//添加部门信息
+	$(document).ready(function(){
+		$.post("/StudentUnion/MyServlet?opt=admStuDep&data="+Math.random(),null,function(data){
+			var str = "";
+			$.each(data,function(i,v){
+				str = "<option value='"+v+"'>"+v+"</option>";
+				$("select[name=sdname], select[name=department]").append(str);
+			});
+		},"json");
+	});
+	
+	//点击提交/修改添加学生
+	function yes(state){
+		var text = "";
+		if(state == 2){
+			opt = "admStuUpd";
+			text = "修改";
+			$("input[name='sno']")[0].disabled = "";
+		} else if(state == 1){
+			opt = "admStuAdd";
+			text = "添加";
+		}
+		var param = $(".addWindow form").serialize();
+		$("input[name='sno']")[0].disabled = "true";
+		$.post("/StudentUnion/MyServlet?opt="+opt+"&data="+Math.random(), param, function(data){
+			if(data==1){
+				$(".finish").text(text+"成功").css("background-color","#10C910").slideDown().delay(1000).slideUp();
+				$(".addWindow form")[0].reset();
+				closeWindow();
+				selStu();
+			} else{
+				$(".finish").text(text+"失败").css("background-color","#F00").slideDown().delay(1000).slideUp();
+			}
+		});
+	}
+	
+	//点击取消隐藏showdiv
+	$("#showDiv input[value=取消]").click(function(){
+		$("#showDiv").css("display","none");
+	});
+	
+</script>
+</html>

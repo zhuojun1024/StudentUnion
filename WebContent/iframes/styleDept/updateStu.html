@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>修改申请</title>
+	<script type="text/javascript" src="/StudentUnion/js/jquery-1.9.1.min.js"></script>
+	<style>
+	*{
+	margin: 0px;
+	padding: 0px;
+	font-family: '幼圆';
+	}
+	.create,.editWindow p:first-child{
+	text-align: center;
+	font-size: 24px;
+	margin: 20px 0px;
+	}
+	table{
+		width: 96%;
+		margin: auto;
+		border-collapse:collapse;
+	}
+	table td{
+		height: 28px;
+		border: 1px solid #1499F7;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	table input{
+		width: 100%;
+		height: 100%;
+		border: none;
+		text-align: center;
+		outline: none;
+		font-size: 15px;
+		background-color: rgba(0,0,0,0);
+	}
+	p a{
+		margin: auto;
+		border-radius: 3px;
+		cursor: pointer;
+		padding: 8px 16px;
+		background-color: #1499F7;
+		color: #FFF;
+		text-decoration: none;
+	}
+	p a:hover{
+		opacity: 0.7;
+	}
+	.bottom,.delBottom,.editWindow p:last-child{
+		width: 96%;
+		text-align: right;
+		margin: 20px auto;
+	}
+	.finish{
+		width: 100%;
+		height: 50px;
+		background-color: #00C900;
+		line-height: 50px;
+		text-align: center;
+		font-size: 20px;
+		color: #FFF;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		display: none;
+	}
+	td a{
+		padding: 4px 20%;
+		text-decoration: none;
+		cursor: pointer;
+		color: #1499F7;
+		font-weight: bold;
+	}
+	td a:hover{
+		color: #00F;
+	}
+	table tr td:nth-child(1){
+		width: 8%;
+	}
+	table tr td:nth-child(2){
+		width: 10%;
+	}
+	table tr td:nth-child(3){
+		width: 16%;
+	}
+	table tr td:nth-child(4){
+		width: 12%;
+	}
+	table tr td:nth-child(5){
+		width: 8%;
+	}
+	table tr td:nth-child(6){
+		width: 10%;
+	}
+	table tr td:nth-child(7){
+		width: 10%;
+	}
+	table tr td:nth-child(8){
+		width: 10%;
+	}
+	table tr td:nth-child(9){
+		width: 8%;
+	}
+	table tr td:nth-child(10){
+		width: 8%;
+	}
+	table tr td:nth-child(10) a{
+		color: #F00;
+		font-weight: normal;
+	}
+	table tr td:nth-child(10) a:hover{
+		font-weight: bold;
+	}
+	.finish{
+		width: 100%;
+		height: 50px;
+		background-color: #00C900;
+		line-height: 50px;
+		text-align: center;
+		font-size: 20px;
+		color: #FFF;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	   	z-index: 1003;
+		display: none;
+	}
+	.mask{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		background-color: rgba(0,0,0,0.5);
+		z-index: 1002;
+		display: none;
+	}
+	.editWindow,.delWindow{
+		width: 500px;
+		height: 240px;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		margin: auto;
+		border: 1px solid #1499F7;
+		border-radius: 5px;
+		background-color: #E7F5FF;
+		display: none;
+	}
+	.editWindow{
+		width: 700px;
+		height: 400px;
+	}
+	.delWindow{
+		width: 400px;
+	}
+	.delWindow .del{
+		background-color: #F00;
+	}
+	.delWindow p:first-child{
+		text-align: center;
+		font-size: 24px;
+		margin: 86px 0px;
+		color: #F00;
+		font-weight: bold;
+	}
+	textarea{
+		width: 100%;
+		height: 100%;
+		border: none;
+		resize: none;
+		background-color: rgba(0,0,0,0);
+		font-size: 16px;
+		padding: 4px;
+		box-sizing: border-box;
+	}
+</style>
+</head>
+<body>
+	<p class="create">申请信息</p>
+	<div id="create_content">
+		<form action="" id="addFrm">
+			<table id="mytab">
+				<tr>
+					<td>序号</td>
+					<td>标题</td>
+					<td>内容</td>
+					<td>时间</td>
+					<td>负责人</td>
+					<td>协助部门</td>
+					<td>联系方式</td>
+					<td>备注</td>
+					<td>修改</td>
+					<td>删除</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+<!--  	<div id="frmDiv">
+		<h2>修改申请</h2>
+		<form action="" class="mytab2">
+			<table>
+				<tr>
+					<td>标题</td>
+					<td><input name="stitle"/></td>
+				</tr>
+				<tr>
+					<td>内容</td>
+					<td><input name="sncontent"/></td>
+				</tr>
+				<tr>
+					<td>时间</td>
+					<td><input name="stime"/></td>
+				</tr>
+				<tr>
+					<td>负责人</td>
+					<td><input name="sleader"/></td>
+				</tr>
+				<tr>
+					<td>协助部门</td>
+					<td><input name="shelp"/></td>
+				</tr>
+				<tr>
+					<td>联系方式</td>
+					<td><input name="scontact"/></td>
+				</tr>
+				<tr>
+					<td>备注</td>
+					<td><input name="sremarks"/></td>
+				</tr>
+			</table>
+					<p><a href="javascript:;" onclick="doUpdate()">修改</a></p>
+		</form>
+	</div> -->
+	<div class="mask">
+		<div class="delWindow">
+			<p>确定要删除该条数据吗？</p>
+			<p class="delBottom">
+				<a href="javascript:closeWindow()">取消</a>
+				<a href="javascript:delNotice()" class="del">确定</a>
+			</p>
+		</div>
+		<div class="editWindow">
+			<p>修改申请信息</p>
+			<form action="" class="mytab2">
+				<table>
+					<tr>
+						<td>标题</td>
+						<td><input name="stitle"/></td>
+					</tr>
+					<tr>
+						<td>内容</td>
+						<td><textarea rows="5" name="sncontent"></textarea></td>
+					</tr>
+					<tr>
+						<td>时间</td>
+						<td><input name="stime"/></td>
+					</tr>
+					<tr>
+						<td>负责人</td>
+						<td><input name="sleader"/></td>
+					</tr>
+					<tr>
+						<td>协助部门</td>
+						<td><input name="shelp"/></td>
+					</tr>
+					<tr>
+						<td>联系方式</td>
+						<td><input name="scontact"/></td>
+					</tr>
+					<tr>
+						<td>备注</td>
+						<td><input name="sremarks"/></td>
+					</tr>
+				</table>
+				<p>
+					<a href="javascript:;" onclick="closeWindow()">关闭</a>
+					<a href="javascript:;" onclick="doUpdate()">修改</a>
+				</p>
+			</form>
+		</div>
+	</div>
+	<div class="finish">
+		提示消息
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$("textarea").prop("spellcheck",false);
+		$(".editWindow table tr:even").css("background-color","#D5EAF3");
+		 loadDate();
+	});
+	$(window).resize(function(){
+		maskResize();
+	});
+	function maskResize(){
+	 $(".mask").css("height",$(document).height());
+	 $(".mask").css("width",$(window).width());
+	}
+	function delshow(vid){
+		$(".delWindow a:last").prop("href","javascript:doRemove("+vid+")");
+		maskResize();
+		$(".delWindow").fadeIn(300);
+		$(".mask").show(300);
+	}
+	function editshow(vid){
+		$(".editWindow a:last").prop("href","javascript:doUpdate("+vid+")");
+		maskResize();
+		$(".editWindow").fadeIn(300);
+		$(".mask").show(300);
+	}
+	function closeWindow(){
+		$(".sname").val("");
+		$(".delWindow,.editWindow").fadeOut(300);
+		$(".mask").hide(300);
+	}
+	//显示所有申请
+	 function loadDate(){
+			//m每次加载数据，清除了第一行之外的所有行
+			$("#mytab tr:not(:first)").remove();
+			$.get("/StudentUnion/StuServlet?opt=Stushow",null,function(data){
+				$.each(data,function(i,v){
+					var tr = "<tr>";
+					tr += "<td>"+(i+1)+"</td>";
+					tr += "<td>"+v.stitle+"</td>";
+					tr += "<td><textarea rows='3' readonly='readonly'>"+v.sncontent+"</textarea></td>";
+					tr += "<td>"+v.stime.substring(0,10)+"</td>";
+					tr += "<td>"+v.sleader+"</td>";
+					tr += "<td>"+v.shelp+"</td>";
+					tr += "<td>"+v.scontact+"</td>";
+					tr += "<td>"+v.sremarks+"</td>";
+					tr += "<td><a href='javascript:;' onclick='toUpdate("+v.id+")'>修改</a></td>";
+					tr += "<td><a href='javascript:;' onclick='delshow("+v.id+")'>删除</a></td>";
+					tr += "</tr>";
+				   	$("#mytab").append(tr);
+				});
+			$("input").prop("spellcheck",false);
+			$("#mytab tr:even").css("background-color","#D5EAF3");
+			},"json");
+	}
+	 //-------------------------------------------------------------------------
+	//删除信息
+	function doRemove(id){
+		$.get("/StudentUnion/StuServlet?opt=remove","id="+id,function(data){
+			if(data==1){
+				$(".finish").text("删除成功").css("background-color","#10C910").slideDown().delay(1000).slideUp();
+			} else{
+				$(".finish").text("删除失败").css("background-color","#F00").slideDown().delay(1000).slideUp();
+			}
+			closeWindow();
+			loadDate();
+		});
+	}
+	
+	function toUpdate(id){
+	//修改界面
+	//异步查询出要修改的详细信息并绑定到表单中
+		$.post("/StudentUnion/StuServlet?opt=stuById","id="+id,function(data){
+			$(".editWindow input[name = stitle]").val(data.stitle);
+			$(".editWindow textarea[name = sncontent]").val(data.sncontent);
+			$(".editWindow input[name = stime]").val(data.stime.substring(0,10));
+			$(".editWindow input[name = sleader]").val(data.sleader);
+			$(".editWindow input[name = shelp]").val(data.shelp);
+			$(".editWindow input[name = scontact]").val(data.scontact);
+			$(".editWindow input[name = sremarks]").val(data.sremarks);
+		},"json");
+		editshow(id);
+	}
+	
+	//执行修改
+	function doUpdate(vid){
+		//表单序列化
+		var param = $(".editWindow form:eq(0)").serialize();
+		param += "&id="+vid;
+		$.post("/StudentUnion/StuServlet?opt=updateStu",param,function(data){
+			if(data==1){
+				$(".finish").text("修改成功").css("background-color","#10C910").slideDown().delay(1000).slideUp();
+				closeWindow();
+			}else{
+				$(".finish").text("修改失败").css("background-color","#F00").slideDown().delay(1000).slideUp();
+			}
+			loadDate();
+		});
+	}
+</script>
+</html>

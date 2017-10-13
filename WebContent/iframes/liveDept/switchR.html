@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+<style>
+	*{
+		margin: 0px;
+		padding: 0px;
+		font-family: '幼圆';
+	}
+	.title{
+		text-align: center;
+		font-size: 24px;
+		margin: 20px 0px;
+	}
+	.tips{
+		text-align: center;
+		color: #1499F7;
+		font-weight: bold;
+	}
+	fieldset{
+		width: 80%;
+		border: 1px solid #1499F7;
+		background-color: rgba(255,255,255,0.4);
+		border-radius: 5px;
+		margin: 30px auto;
+		padding: 12px;
+	}
+	legend{
+		margin-left: 30px;
+		padding: 0px 5px;
+		font-size: 18px;
+		color: #1499F7;
+		font-weight: bold;
+	}
+	fieldset .content{
+		line-height: 24px;
+		text-indent: 2em;
+		word-break: break-all; 
+	}
+	.bottom{
+		width: 82%;
+		text-align: right;
+		margin: 20px auto;
+	}
+	
+	.bottom a{
+		margin: auto;
+		border-radius: 3px;
+		cursor: pointer;
+		padding: 8px 16px;
+		background-color: #1499F7;
+		text-decoration: none;
+		color: #FFF;
+	}
+	.bottom a:hover{
+		opacity: 0.7;
+	}
+</style>
+</head>
+<body>
+	<p class="title">身份切换</p>
+	<fieldset>
+		<legend>说明</legend>
+		<p class="content">身份切换功能可让学生会账号临时切换到普通学员账号，方便学生会查询学员才能查到的信息。切换仅本次有效，下次登录将还原学生会身份。切换后如需立即还原，注销重新登录即可。</p>
+	</fieldset>
+	<p class="bottom"><a href="javascript:;" onclick="top.location.href='/StudentUnion/SwitchRoleServlet'">立即切换</a></p>
+</body>
+</html>

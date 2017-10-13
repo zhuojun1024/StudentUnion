@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/StudentUnion/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/StudentUnion/css/admin/class.css" />
+<style>
+</style>
+</head>
+<body>
+	<p class="notice">班级管理</p>
+	<p class="search">
+		<a href="javascript:;" onclick="addshow()" id="insCla">新增班级</a>
+	</p>
+	<table id="tab">
+		<tr>
+			<td>编号</td>
+			<td>名称</td>
+			<td>人数</td>
+			<td>操作</td>
+		</tr>
+	</table>
+	<p class="botton"></p>
+ 	<div class="mask">
+		<div class="renameWindow">
+			<p class="title1">请输入新名称</p>
+			<p class="title2">请输入新班级的名称</p>
+			<p><input name="name"/></p>
+			<p class="renameBottom">
+				<a href="javascript:;" onclick="closeWindow()">取消</a>
+				<a href="javascript:;">确定</a>
+			</p>
+		</div>
+	</div>
+	<div class="finish">
+		编辑成功
+	</div>
+</body>
+<script>
+	
+	var page = 1;
+	var pnum = 1;
+
+	$(document).ready(function(){
+		sel();
+		$("input").prop("spellcheck",false);
+	});
+	$(window).resize(function(){
+		maskResize();
+	});
+	function maskResize(){
+	 $(".mask").css("height",$(document).height());
+	 $(".mask").css("width",$(window).width());
+	}
+	function renameshow(obj,cid){
+		$(".renameWindow a:last").attr("onclick","admClaUpd("+cid+")");
+		maskResize();
+		$(".renameWindow,.title1").fadeIn(300);
+		$(".mask").show(300);
+		$("input[name='name']").val($(obj).parent().parent().find("td:eq(1)").text());
+		$("input[name='name']").focus();
+	}
+	function addshow(){
+		$(".renameWindow a:last").attr("onclick","addCla()");
+		maskResize();
+		$(".renameWindow,.title2").fadeIn(300);
+		$(".mask").show(300);
+		$("input[name='name']").focus();
+	}
+	function closeWindow(){
+		$("input[name='name']").val("");
+		$(".renameWindow,.title1,.title2").fadeOut(300);
+		$(".mask").hide(300);
+	}
+	//查询班级信息
+	function sel(){
+		$.post("/StudentUnion/MyServlet?opt=admClaSel&data="+Math.random(),"page="+page,function(data){
+			$("#tab tr:not(:first)").remove();
+			$.each(data,function(i,v){
+				pnum = v.cpage;
+				$("#tab").append("<tr><td>"+((page-1)*12+i+1)+"</td><td>"+v.cname+"</td><td>"+v.csum+"</td><td><a href='javascript:;' onclick='renameshow(this,"+v.cid+")'>更名</a></td></tr>");
+			});
+			if(data == 0){
+				$("#tab").append("<tr><td colspan='4'>暂无记录</td></tr>");
+			}else{
+				$(".botton").empty().append("<a href='javascript:;' onclick='javascript:aUp()'>上一页</a>第" +
+						page + "/" + pnum +
+						"页<a href='javascript:;' onclick='javascript:aDown()'>下一页</a>");
+			}
+			$("#tab tr:even").css("background-color","#D5EAF3");
+		},"json");
+	}
+	
+	function aUp(){
+		if(page > 1){
+			page--;
+		}
+		sel();
+	}
+	
+	function aDown(){
+		if(page < pnum){
+			page++;
+		}
+		sel();
+	}
+	
+	//新增班级
+	function addCla(){
+		var name = $("input[name='name']").val();
+		if(name.length != 0){
+			$.post("/StudentUnion/MyServlet?opt=admClaIns&data="+Math.random(),"name="+name,function(data){
+				if(data == 1){
+					$(".finish").text("新增成功").css("background-color","#10C910").slideDown().delay(1000).slideUp();
+					sel();
+				} else{
+					$(".finish").text("新增失败，请检查是否有重名班级").css("background-color","#F00").slideDown().delay(1500).slideUp();
+				}
+				closeWindow();
+			});
+		}
+	}
+	
+	//修改班级名称
+	function admClaUpd(cid){
+		var name = $("input[name='name']").val();
+		if(name.length != 0){
+			$.post("/StudentUnion/MyServlet?opt=admClaUpd&data="+Math.random(),"name="+name+"&cid="+cid,function(data){
+				if(data == 1){
+					$(".finish").text("修改成功").css("background-color","#10C910").slideDown().delay(1000).slideUp();
+					sel();
+				} else{
+					$(".finish").text("修改失败，请检查是否有重名班级").css("background-color","#F00").slideDown().delay(1500).slideUp();
+				}
+				closeWindow();
+			});
+		}
+	}
+
+	
+</script>
+</html>

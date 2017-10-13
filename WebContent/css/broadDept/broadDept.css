@@ -1,0 +1,118 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: '幼圆';
+}
+html,body{
+	height: 100%;
+	background-color: #E7F5FF;
+}
+@font-face{
+	font-family: 'fontello';
+	src: url('/StudentUnion/fonts/fontello.ttf');
+}
+.top{
+	width: 100%;
+	min-width: 850px;
+	height: 11%;
+	overflow: hidden;
+	line-height: 70px;
+	background-color: #1499F7;
+}
+.top .logo{
+	width: 330px;
+	height: 100%;
+	color: #FFF;
+	font-size: 22px;
+	margin-left: 12px;
+	float: left;
+	background: url('/StudentUnion/images/logo.png') no-repeat 2px;
+	background-size: 60px;
+}
+.top .logo span{
+	margin-left: 70px;
+}
+.user{
+	width: 330px;
+	height: 100%;
+	text-align: center;
+	color: #FFF;
+	font-size: 18px;
+	margin: auto;
+}
+.datetime{
+	width: 300px;
+	height: 100%;
+	text-align: right;
+	padding-right: 12px;
+	color: #FFF;
+	font-size: 18px;
+	float: right;
+	letter-spacing:2px;
+}
+.main{
+	width: 100%;
+	min-width: 600px;
+	height: 89%;
+}
+.menu{
+	width: 16%;
+	height: 100%;
+	float: left;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	background-color: #D5EAF3;
+	-webkit-user-select: none;
+}
+.table{
+	width: 84%;
+	height: 100%;
+	float: left;
+	background-color: #E7F5FF;
+}
+.menu div, .menu ul li{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+	border-bottom: 1px solid #99D9EA;
+}
+.menu div:hover, .menu ul li:hover{
+	background-color: #99D9EA;
+}
+.sel{
+	background-color: #99D9EA;
+	font-weight: bolder;
+}
+.menu div span{
+	font-family: 'fontello';
+}
+.menu ul{
+	display: none;
+	list-style-type: none;
+	border-bottom: 1px solid #99D9EA;
+}
+.menu ul li{
+	border: none;
+	padding-left: 13px;
+}
+.table a{
+	position: absolute;
+	left: 16%;
+	top: 50%;
+ 	font-family: 'fontello';
+	font-size: 40px;
+	color: #1499F7;
+	text-decoration: none;
+	display: none;
+}
+.table iframe{
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	border: none;
+	overflow-x: hidden;
+}
